@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/auth_user_db?currentSchema=auth_user
+    url: jdbc:postgresql://localhost:5434/auth_user_db?currentSchema=auth_user
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
