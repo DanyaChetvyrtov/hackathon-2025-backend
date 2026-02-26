@@ -6,14 +6,14 @@ spring:
           routes:
             # Auth paths
             - id: auth-service-api
-              uri: http://auth-ms:4000
+              uri: http://auth-ms:5002
               predicates:
                 - Path=/auth/api/v1/**
               filters:
                 - RewritePath=/auth/api/v1/(?<path>.*), /api/v1/$\{path}
 
             - id: profile-service-api
-              uri: http://profile-ms:4001
+              uri: http://profile-ms:5003
               predicates:
                 - Path=/profile/api/v1/**
               filters:

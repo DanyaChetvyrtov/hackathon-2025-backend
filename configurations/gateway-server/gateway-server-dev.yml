@@ -5,23 +5,16 @@ spring:
         webflux:
           routes:
             - id: auth-service-api
-              uri: http://localhost:4000
+              uri: http://localhost:5002
               predicates:
                 - Path=/auth/api/v1/**
               filters:
                 - RewritePath=/auth/api/v1/(?<path>.*), /api/v1/$\{path}
 
             - id: profile-service-api
-              uri: http://localhost:4001
+              uri: http://localhost:5003
               predicates:
                 - Path=/profile/api/v1/**
               filters:
                 - RewritePath=/profile/api/v1/(?<path>.*), /api/v1/$\{path}
                 - JwtValidation
-
-            - id: routes-service-api
-              uri: http://localhost:4003
-              predicates:
-                - Path=/routes/api/v1/**
-              filters:
-                - RewritePath=/routes/api/v1/(?<path>.*), /api/v1/$\{path}
