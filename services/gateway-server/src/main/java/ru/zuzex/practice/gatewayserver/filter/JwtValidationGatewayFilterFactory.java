@@ -60,16 +60,7 @@ public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFact
         return request.mutate()
                 .header("X-User-Id", userInfo.getUserId())
                 .header("X-User-Name", userInfo.getUsername())
-                .header("X-User-Roles", rolesToString(userInfo.getRoles()))
                 .build();
-    }
-
-    private String rolesToString(Set<Role> roles) {
-        return roles != null && !roles.isEmpty() ?
-                roles.stream()
-                        .map(Enum::name)
-                        .collect(Collectors.joining(",")) :
-                "";
     }
 
     private Mono<Void> unauthorized(ServerWebExchange exchange, String message) {

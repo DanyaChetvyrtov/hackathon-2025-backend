@@ -10,7 +10,7 @@ readonly YELLOW=$(tput setaf 3)
 readonly BOLD=$(tput bold)
 readonly RESET=$(tput sgr0)
 
-readonly NETWORK_NAME="sueta-rnd-helper"
+readonly NETWORK_NAME="tourist-helper-network"
 
 log_info() {
     echo "${BLUE}ℹ ${*}${RESET}"

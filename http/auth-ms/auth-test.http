@@ -6,7 +6,7 @@ POST {{path}}/register
 Content-Type: application/json
 
 {
-    "username": "Chiba2",
+    "username": "Chiba7",
     "password": "root",
     "passwordConfirmation": "root"
 }
@@ -16,7 +16,7 @@ POST {{path}}/login
 Content-Type: application/json
 
 {
-    "username": "Chiba",
+    "username": "Chiba2",
     "password": "root"
 }
 

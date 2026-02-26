@@ -16,6 +16,5 @@ import java.util.Set;
 public class RequestOwner {
     private String userId;
     private String username;
-    private Set<Role> roles;
     private Date expiresAt;
 }

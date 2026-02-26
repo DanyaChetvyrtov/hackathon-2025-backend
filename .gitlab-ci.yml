@@ -1,0 +1,44 @@
+stages:
+  - build
+
+build-services:
+  stage: build
+  image: gradle:8.6-jdk21-alpine
+  services:
+    - name: postgres:latest
+      alias: postgres
+
+  variables:
+    POSTGRES_DB: "event_db"
+    POSTGRES_USER: "postgres"
+    POSTGRES_PASSWORD: "root"
+
+    DB_HOST: "postgres"
+    DB_NAME: "event_db"
+
+  before_script: |
+    echo "Building service: $SERVICE"
+    cd "services/$SERVICE"
+  script:
+    - gradle build -x test --no-daemon
+  cache:
+    key: "gradle-$SERVICE-$CI_COMMIT_REF_SLUG"
+    paths:
+      - .gradle/caches
+      - .gradle/wrapper
+    policy: pull-push
+  artifacts:
+    paths:
+      - "services/$SERVICE/build/libs/*.jar"
+    expire_in: 1 week
+  parallel:
+    matrix:
+      - SERVICE: ["auth-ms", "profile-ms", "event-ms", "gateway-server", "config-server"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH =~ /^feature\/.+/
+      changes:
+        - "services/$SERVICE/**/*"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "services/$SERVICE/**/*"

@@ -7,7 +7,7 @@ spring:
     change-log: db/changelog/db.changelog-master.yml
 
 server:
-  port: 4000
+  port: 5001
 
 security:
   jwt:
