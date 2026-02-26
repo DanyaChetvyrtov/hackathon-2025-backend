@@ -1,29 +1,23 @@
 package rnd.sueta.event_ms.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
-import rnd.sueta.event_ms.enums.Category;
-import rnd.sueta.event_ms.model.Event;
+import rnd.sueta.event_ms.enums.PlaceType;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record PlaceDto(
         UUID id,
 
         String title,
 
-        String type,
+        PlaceType type,
 
         BigDecimal latitude,
 
-        BigDecimal longitude,
-
-        String address,
-
-        String image,
-
-        List<Event> events
+        BigDecimal longitude
 ) {
 }

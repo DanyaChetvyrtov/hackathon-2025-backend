@@ -3,7 +3,7 @@ package rnd.sueta.event_ms.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 @Builder
@@ -13,11 +13,9 @@ public record ExceptionRs(
 
         String error,
 
-        String path,
-
         String message,
 
-        LocalDateTime timestamp,
+        OffsetDateTime timestamp,
 
         Map<String, String> errors
 ) {
