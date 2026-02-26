@@ -76,7 +76,6 @@ public class JwtTokenUtils {
         return RequestOwner.builder()
                 .userId(claims.get("id", String.class))
                 .username(claims.getSubject())
-                .roles(roles)
                 .expiresAt(claims.getExpiration())
                 .build();
     }

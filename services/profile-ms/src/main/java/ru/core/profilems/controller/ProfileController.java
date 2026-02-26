@@ -14,25 +14,6 @@ import java.util.UUID;
 @Tag(name = "Profile API", description = "Profile endpoints")
 public interface ProfileController {
     @Operation(
-            summary = "Receive all profiles",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Successfully retrieved profiles"),
-                    @ApiResponse(responseCode = "400", description = "Invalid parameters")
-            }
-    )
-    ResponseEntity<PageRs<ProfileDto>> getProfiles(Integer page, Integer size);
-
-    @Operation(
-            summary = "Search profiles by query(name or surname)",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Successfully retrieved profiles"),
-                    @ApiResponse(responseCode = "404", description = "Profiles not found")
-            }
-    )
-    ResponseEntity<PageRs<ProfileDto>> searchProfiles(
-            String query, boolean ignoreCase, Integer page, Integer size);
-
-    @Operation(
             summary = "Receive profile and its Tasks by ID",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Successfully retrieved profile"),
