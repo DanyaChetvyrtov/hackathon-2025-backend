@@ -14,6 +14,5 @@ public record RouteWithPlacesRs(
 
         UUID profileId,
 
-        List<PlaceDto> places
-) {
+        List<PlaceDto> places) {
 }

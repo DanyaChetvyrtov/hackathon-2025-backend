@@ -8,3 +8,9 @@ spring:
       fail-fast: true
   config:
     import: "configserver:"
+
+minio:
+  endpoint: http://${MINIO_HOST}:${MINIO_PORT}
+  access-key: ${MINIO_ACCESS_KEY}
+  secret-key: ${MINIO_SECRET_KEY}
+  bucket-name: ${MINIO_BUCKET_NAME}

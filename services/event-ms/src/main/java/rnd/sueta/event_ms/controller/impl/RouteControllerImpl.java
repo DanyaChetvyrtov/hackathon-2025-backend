@@ -6,7 +6,6 @@ import rnd.sueta.event_ms.controller.RouteController;
 import rnd.sueta.event_ms.dto.request.CreateRouteRq;
 import rnd.sueta.event_ms.dto.response.RouteWithDetailsRs;
 import rnd.sueta.event_ms.dto.response.RouteWithPlacesRs;
-import rnd.sueta.event_ms.mapper.PointMapper;
 import rnd.sueta.event_ms.mapper.RouteMapper;
 import rnd.sueta.event_ms.model.RouteGenerationParams;
 import rnd.sueta.event_ms.model.RouteWithEvents;
@@ -20,7 +19,6 @@ import java.util.UUID;
 public class RouteControllerImpl implements RouteController {
     private final RouteManager routeManager;
     private final RouteMapper routeMapper;
-    private final PointMapper pointMapper;
 
     @Override
     public RouteWithPlacesRs getById(UUID id) {

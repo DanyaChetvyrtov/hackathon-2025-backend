@@ -20,8 +20,8 @@ public final class DistanceCalculator {
      *
      * <p>
      * <img src="../../../../../../../../../docs/haversinus_formula.png"
-     *      width="550"
-     *      alt="Haversinus formula example at project_root/docs/haversinus_formula.png"/>
+     * width="550"
+     * alt="Haversinus formula example at project_root/docs/haversinus_formula.png"/>
      *
      * @param startPoint              point with longitude and latitude from which calculate distance
      * @param calculatedDistancePoint point with longitude and latitude to which calculate distance

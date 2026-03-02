@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "events", schema = "event")
+@Table(name = "places", schema = "event")
 public class Place {
     @Id
     private UUID id;
