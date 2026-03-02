@@ -13,6 +13,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class EventRegistrationServiceImpl implements EventRegistrationService {
+
     private final EventService eventService;
     private final PlaceService placeService;
     private final PlaceValidator placeValidator;

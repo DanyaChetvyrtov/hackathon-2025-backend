@@ -3,8 +3,11 @@ package rnd.sueta.event_ms.service.entity.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rnd.sueta.event_ms.constants.EventConstants;
 import rnd.sueta.event_ms.enums.EventType;
 import rnd.sueta.event_ms.model.DateTimeRange;
 import rnd.sueta.event_ms.model.EventFilterParams;
@@ -24,12 +27,17 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
 
     @Override
-    public Page<EventWithPlace> getAll(EventFilterParams eventFilterParams) {
-        DateTimeRange range = DateTimeRangeFactory.getRange(eventFilterParams.date(), 1);
+    public Page<EventWithPlace> getAllByFilter(EventFilterParams eventFilterParams) {
+        DateTimeRange range = DateTimeRangeFactory.getRange(
+                eventFilterParams.date(),
+                EventConstants.ONE_DAY_AFTER_START
+        );
+
+        Pageable pageable = PageRequest.of(eventFilterParams.page(), eventFilterParams.size());
 
         return eventFilterParams.categories() != null
-                ? getAllByDateAndCategories(range, eventFilterParams)
-                : getAllByDate(range, eventFilterParams);
+                ? getAllByDateAndCategories(eventFilterParams.categories(), range, pageable)
+                : getAllByDate(range, pageable);
     }
 
     @Override
@@ -67,14 +75,19 @@ public class EventServiceImpl implements EventService {
         eventRepository.deleteById(id);
     }
 
-    private Page<EventWithPlace> getAllByDate(DateTimeRange range, EventFilterParams eventFilterParams) {
-        return eventRepository.findEventsWithPlaceByDate(range, eventFilterParams.pageable());
+    @Override
+    public boolean exists(UUID id) {
+        return eventRepository.existsById(id);
     }
 
-    private Page<EventWithPlace> getAllByDateAndCategories(DateTimeRange range, EventFilterParams eventFilterParams) {
-        return eventRepository.findEventsWithPlaceByDateAndCategories(
-                range,
-                eventFilterParams.pageable(),
-                eventFilterParams.categories());
+    private Page<EventWithPlace> getAllByDate(DateTimeRange range, Pageable pageable) {
+        return eventRepository.findEventsWithPlaceByDate(range, pageable);
+    }
+
+    private Page<EventWithPlace> getAllByDateAndCategories(
+            List<EventType> categories,
+            DateTimeRange range,
+            Pageable pageable) {
+        return eventRepository.findEventsWithPlaceByDateAndCategories(categories, range, pageable);
     }
 }

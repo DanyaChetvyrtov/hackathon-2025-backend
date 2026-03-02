@@ -14,7 +14,6 @@ import java.util.stream.IntStream;
 
 @Component
 public final class RouteHelper {
-
     public List<RoutePlaces> mapRoutePlaces(UUID routeId, List<EventWithPlace> placesInRange) {
         return IntStream.range(0, placesInRange.size())
                 .mapToObj(index -> {

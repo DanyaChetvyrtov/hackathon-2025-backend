@@ -1,4 +1,4 @@
-package rnd.sueta.event_ms.properties;
+package rnd.sueta.event_ms.config.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

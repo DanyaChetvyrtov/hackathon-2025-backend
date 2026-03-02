@@ -28,6 +28,7 @@ public class RouteServiceImpl implements RouteService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional
     @Override
     public Route saveRouteWithPlaces(List<EventWithPlace> places, UUID profileId) {
         final UUID routeId = UUID.randomUUID();

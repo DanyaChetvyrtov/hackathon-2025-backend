@@ -26,6 +26,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class RouteManagerImpl implements RouteManager {
+
     private final RouteService routeService;
     private final PlaceService placeService;
     private final EventService eventService;

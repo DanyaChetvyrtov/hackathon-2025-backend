@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EventService {
-    Page<EventWithPlace> getAll(EventFilterParams eventFilterParams);
+    Page<EventWithPlace> getAllByFilter(EventFilterParams eventFilterParams);
 
     List<EventWithPlace> getAllInRangeByCategories(Point startPoint, Point endPoint, List<EventType> categories);
 
@@ -22,4 +22,6 @@ public interface EventService {
     Event update(UUID id, Event event);
 
     void delete(UUID id);
+
+    boolean exists(UUID id);
 }

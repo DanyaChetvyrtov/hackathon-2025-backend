@@ -45,9 +45,9 @@ public class EventRepository {
     }
 
     public Page<EventWithPlace> findEventsWithPlaceByDateAndCategories(
+            List<EventType> categories,
             DateTimeRange range,
-            Pageable pageable,
-            List<EventType> categories
+            Pageable pageable
     ) {
         Long total = dsl.selectCount()
                 .from(Tables.EVENTS)
@@ -115,5 +115,11 @@ public class EventRepository {
         dsl.deleteFrom(Tables.EVENTS)
                 .where(Tables.EVENTS.ID.eq(id))
                 .execute();
+    }
+
+    public boolean existsById(UUID id) {
+        return dsl.fetchExists(dsl.selectOne()
+                .from(Tables.EVENTS)
+                .where(Tables.EVENTS.ID.eq(id)));
     }
 }
