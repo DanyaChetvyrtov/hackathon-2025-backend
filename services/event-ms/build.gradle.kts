@@ -60,10 +60,12 @@ val envVars = loadEnv(envFile)
 
 // versions
 val postgresVersion = "42.6.0"
+val minioVersion = "8.5.7"
 val jakartaPersistenceVersion = "3.2.0"
 val jooqVersion = "3.19.13"
 val liquibaseVersion = "4.33.0"
 val mapstructVersion = "1.6.3"
+val apacheCommonsIoVersion = "2.21.0"
 val lombokMapstructBindingVersion = "0.2.0"
 
 //
@@ -112,6 +114,9 @@ dependencies {
     // persist
     implementation("jakarta.persistence:jakarta.persistence-api:$jakartaPersistenceVersion")
 
+    // minio
+    implementation("io.minio:minio:$minioVersion")
+
     // db
     runtimeOnly("org.postgresql:postgresql:$postgresVersion")
     jooqGenerator("org.postgresql:postgresql:$postgresVersion")
@@ -125,6 +130,9 @@ dependencies {
     // mapper
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
     annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+
+    // utils
+    implementation("commons-io:commons-io:$apacheCommonsIoVersion")
 
     // swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")

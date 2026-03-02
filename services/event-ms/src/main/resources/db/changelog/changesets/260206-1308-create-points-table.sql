@@ -1,3 +1,6 @@
+-- liquibase formatted sql
+
+-- changeset dasemenov:260206-1308-create-points-table
 CREATE TABLE IF NOT EXISTS points
 (
     id uuid PRIMARY KEY,
@@ -6,3 +9,4 @@ CREATE TABLE IF NOT EXISTS points
 
     UNIQUE(latitude, longitude)
 );
+-- rollback DROP TABLE points;

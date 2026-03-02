@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import rnd.sueta.event_ms.constants.ErrorMessages;
 import rnd.sueta.event_ms.dto.response.ExceptionRs;
+import rnd.sueta.event_ms.exception.custom.InvalidPhotoExtension;
+import rnd.sueta.event_ms.exception.custom.InvalidPhotoOwnerType;
 import rnd.sueta.event_ms.exception.custom.OutOfCityPointException;
+import rnd.sueta.event_ms.exception.custom.PhotoProcessingException;
 import rnd.sueta.event_ms.util.ExceptionResponseFactory;
 
 import java.time.Clock;
@@ -23,5 +27,25 @@ public class DomainExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionRs handleOutOfCityPointException(OutOfCityPointException exception) {
         return ExceptionResponseFactory.newBadRequest(exception.getMessage(), clock);
+    }
+
+    @ExceptionHandler(InvalidPhotoExtension.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionRs handleInvalidPhotoExtension(InvalidPhotoExtension exception) {
+        return ExceptionResponseFactory.newBadRequest(exception.getMessage(), clock);
+    }
+
+    @ExceptionHandler(InvalidPhotoOwnerType.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionRs handleInvalidPhotoOwnerType(InvalidPhotoOwnerType exception) {
+        return ExceptionResponseFactory.newBadRequest(exception.getMessage(), clock);
+    }
+
+    @ExceptionHandler(PhotoProcessingException.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public ExceptionRs handlePhotoProcessingException() {
+        return ExceptionResponseFactory.newServiceUnavailable(
+                ErrorMessages.SERVICE_TEMPORARILY_UNAVAILABLE.formatted("Photo"), clock
+        );
     }
 }

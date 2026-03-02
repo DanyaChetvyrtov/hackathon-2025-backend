@@ -3,6 +3,7 @@ package rnd.sueta.event_ms.service.entity.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,18 +23,15 @@ public class PlaceServiceImpl implements PlaceService {
     private final PointValidator pointValidator;
 
     @Override
-    public Page<PlaceWithCoordinates> getAll(Pageable pageable) {
+    public Page<PlaceWithCoordinates> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
         return placeRepository.findAll(pageable);
     }
 
     @Override
     public List<PlaceWithCoordinates> getByRouteId(UUID routeId) {
         return placeRepository.findAllByRouteId(routeId);
-    }
-
-    @Override
-    public List<UUID> getAllIdsInRange(Point startPoint, Point endPoint) {
-        return placeRepository.findAllIdsInRange(startPoint, endPoint);
     }
 
     @Override

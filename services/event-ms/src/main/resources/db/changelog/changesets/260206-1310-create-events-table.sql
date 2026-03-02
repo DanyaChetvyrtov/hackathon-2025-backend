@@ -1,3 +1,6 @@
+-- liquibase formatted sql
+
+-- changeset dasemenov:260206-1309-create-events-table
 CREATE TABLE IF NOT EXISTS events
 (
     id              UUID PRIMARY KEY,
@@ -7,6 +10,6 @@ CREATE TABLE IF NOT EXISTS events
     event_end       TIMESTAMPTZ NOT NULL,
     price           DECIMAL(10, 2),
     age_restriction INTEGER DEFAULT 0,
-    place_id        UUID NOT NULL,
-    FOREIGN KEY (place_id) REFERENCES places (id)
+    place_id        UUID NOT NULL REFERENCES places (id)
 );
+-- rollback DROP TABLE events;
