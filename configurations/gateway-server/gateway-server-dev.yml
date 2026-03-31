@@ -4,6 +4,14 @@ spring:
       server:
         webflux:
           routes:
+            - id: event-service-api
+              uri: http://localhost:4000
+              predicates:
+                - Path=/event/api/v1/**
+              filters:
+                - RewritePath=/event/api/v1/(?<path>.*), /api/v1/$\{path}
+                - JwtValidation
+
             - id: auth-service-api
               uri: http://localhost:5002
               predicates:
